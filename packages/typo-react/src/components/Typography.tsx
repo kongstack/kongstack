@@ -29,7 +29,7 @@ export interface TypographyProps extends React.HTMLAttributes<HTMLElement> {
     italic?: boolean;
     truncate?: boolean;
     lineClamp?: number;
-    variants: keyof TypographyVariantRegistry;
+    variant?: keyof TypographyVariantRegistry;
 }
 
 const Typography = React.forwardRef<HTMLElement, TypographyProps>(({
@@ -46,22 +46,36 @@ const Typography = React.forwardRef<HTMLElement, TypographyProps>(({
     italic,
     truncate,
     lineClamp,
+    variant,
     ...props
 }, ref)  => {
     const Component = as as React.ElementType;
 
-    const theme = useTypo();
+    const theme = useTypo()
+
+    // resolve variant first
+    const variantStyles = variant ? theme.variants?.[variant] : undefined
+
+    const resolvedSize = size ?? variantStyles?.size
+    const resolvedWeight = weight ?? variantStyles?.weight
+    const resolvedFont = font ?? variantStyles?.font
+    const resolvedLineHeight = lineHeight ?? variantStyles?.lineHeight
+    const resolvedLetterSpacing = letterSpacing ?? variantStyles?.letterSpacing
+    const resolvedAlign = align ?? variantStyles?.align
+    const resolvedTransform = transform ?? variantStyles?.transform
+    const resolvedDecoration = decoration ?? variantStyles?.decoration
+    const resolvedItalic = italic ?? variantStyles?.italic
 
     const style: React.CSSProperties = {
-        fontSize: size ? theme.sizes[size] : undefined,
-        fontWeight: weight ? theme.weights[weight] : undefined,
-        fontFamily: font ? theme.fonts[font] : undefined,
-        lineHeight: lineHeight ? theme.lineHeights[lineHeight] : undefined,
-        letterSpacing: letterSpacing ? theme.letterSpacing[letterSpacing] : undefined,
-        textAlign: align,
-        textTransform: transform,
-        textDecoration: decoration,
-        fontStyle: italic ? 'italic' : undefined,
+        fontSize: resolvedSize ? theme.sizes[resolvedSize] : undefined,
+        fontWeight: resolvedWeight ? theme.weights[resolvedWeight] : undefined,
+        fontFamily: resolvedFont ? theme.fonts[resolvedFont] : undefined,
+        lineHeight: resolvedLineHeight ? theme.lineHeights[resolvedLineHeight] : undefined,
+        letterSpacing: resolvedLetterSpacing ? theme.letterSpacing[resolvedLetterSpacing] : undefined,
+        textAlign: resolvedAlign,
+        textTransform: resolvedTransform,
+        textDecoration: resolvedDecoration,
+        fontStyle: resolvedItalic ? 'italic' : undefined,
         overflow: truncate ? 'hidden' : undefined,
         textOverflow: truncate ? 'ellipsis' : undefined,
         whiteSpace: truncate ? 'nowrap' : undefined,
