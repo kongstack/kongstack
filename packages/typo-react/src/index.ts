@@ -9,3 +9,4 @@ export { defaultTheme } from './theme/defaultTheme'
 // types
 export type { TypoTheme } from './types/theme'
 export type { TypoProviderProps } from './theme/TypoProvider'
+export type { TypographyVariantRegistry } from './types/registry'

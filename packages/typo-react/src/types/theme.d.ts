@@ -31,4 +31,17 @@ export interface TypoTheme {
         wide: string
         wider: string
     }
+    variants?: Record<string, TypographyVariant>
+}
+
+export interface TypographyVariant {
+    size?: keyof TypoTheme['sizes']
+    weight?: keyof TypoTheme['weights']
+    font?: keyof TypoTheme['fonts']
+    lineHeight?: keyof TypoTheme['lineHeights']
+    letterSpacing?: keyof TypoTheme['letterSpacing']
+    align?: 'left' | 'center' | 'right' | 'justify'
+    transform?: 'uppercase' | 'lowercase' | 'capitalize' | 'none'
+    decoration?: 'underline' | 'line-through' | 'none'
+    italic?: boolean
 }
