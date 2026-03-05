@@ -1,0 +1,10 @@
+# Build
+.dist
+dist
+build
+
+# Modules
+node_modules
+
+# Mac File Finder
+.DS_Store
