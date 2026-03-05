@@ -1,5 +1,6 @@
 {
   "name": "@kongstack/typo-react",
+  "repository": "https://github.com/kongstack/kongstack.git",
   "author": "Brandon Kong",
   "version": "0.1.0",
   "description": "A headless, configurable React typography library",  "main": "./dist/index.js",
