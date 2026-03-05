@@ -1,6 +1,6 @@
 {
     "name": "@kongstack/typescript",
-    "exports": [
-        "./tsconfig.base.json"
-    ]
+    "exports": {
+        "./tsconfig.base.json": "./tsconfig.base.json"
+    }
 }
